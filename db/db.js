@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 const { name } = require("../package.json");
-// name === ttpbackend2023
+// name === crudapplicationbackend
 
 const db = new Sequelize(`postgres://liuke:220701528@localhost:5432/${name}`, {
   logging: false,
