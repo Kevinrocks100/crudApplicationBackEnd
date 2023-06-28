@@ -29,7 +29,7 @@ const Student = db.define('student', {
     defaultValue: 'default_image_url.jpg', 
   },
   gpa: {
-    type: DataTypes.DECIMAL(1, 1),
+    type: DataTypes.DECIMAL(2, 1),
     validate: {
       min: 0.0,
       max: 4.0,
