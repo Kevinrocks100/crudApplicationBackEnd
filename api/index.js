@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 // Already mounted on /api/
-router.use("/campus", require("./campus"));
+router.use("/campuses", require("./campuses"));
 router.use("/students", require("./students"));
 
 // 404 Handling

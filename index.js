@@ -7,9 +7,6 @@ const app = express();
 // Mount on API
 app.use("/api", require("./api"));
 
-// Syncing DB Function
-const syncDB = () => db.sync();
-
 // Run server function
 const serverRun = () => {
   app.listen(PORT, () => {
@@ -17,7 +14,11 @@ const serverRun = () => {
   });
 };
 
-syncDB();
-serverRun();
+async function main() {
+  await db.sync();
+  await serverRun();
+}
+
+main();
 
 module.exports = app;
