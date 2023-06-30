@@ -7,11 +7,12 @@ const seedCampuses = [
 ]; 
 
 const seedStudents = [
-    { firstName: "Kevin", lastName: "Liu", email: "liukevin209@gmail.com", imageUrl:"123.jpg", gpa: "3.6"}, 
-    { firstName: "Andy", lastName: "Chen", email: "ChenAndy209@gmail.com", imageUrl:"456.jpg", gpa: "3.7"}
+    { firstName: "Kevin", lastName: "Liu", email: "liukevin209@gmail.com", imageUrl:"123.jpg", gpa: "3.6", campusId: 2}, 
+    { firstName: "Andy", lastName: "Chen", email: "ChenAndy209@gmail.com", imageUrl:"456.jpg", gpa: "3.7", campusId: 1}
 ]
 
 const seed = async () => {
+    await db.sync(); 
     await Campus.bulkCreate(seedCampuses);
     await Student.bulkCreate(seedStudents);
 };
