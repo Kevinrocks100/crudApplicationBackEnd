@@ -17,7 +17,11 @@ router.get("/", async (req, res, next) => {
 //http://localhost:8080/api/students/:id
 router.get("/:id", async (req, res, next) => {
     try {
-      const student = await Student.findByPk(req.params.id)
+      const student = await Student.findByPk(req.params.id, {
+        include: {
+          model: Campus,
+        },
+      })
       student
         ? res.status(200).json(student)
         : res.status(404).send("Student Not Found");
