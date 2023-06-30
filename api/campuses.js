@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Campus } = require("../db/models");
+const { Campus, Student } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
     try {
@@ -13,5 +13,21 @@ router.get("/", async (req, res, next) => {
         next(error);
     }
 });
+
+//http://localhost:8080/api/campuses/:id
+router.get("/:id", async (req, res, next) => {
+    try {
+      const campus = await Campus.findByPk(req.params.id, {
+        include: {
+          model: Student,
+        },
+      });
+      campus
+        ? res.status(200).json(campus)
+        : res.status(404).send("Campus Not Found");
+    } catch (error) {
+      next(error);
+    }
+  });
 
 module.exports = router; 
