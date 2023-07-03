@@ -29,6 +29,16 @@ router.get("/:id", async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  });
+});
+
+router.post("/add", async (req, res, next) => {
+  const {firstName, lastName, email, imageUrl, gpa} = req.body;
+  try {
+      const newStudent = await Student.create({firstName, lastName, email, imageUrl, gpa});
+      res.status(201).json(newStudent);
+  } catch (err) {
+      next(err);
+  }
+});
 
 module.exports = router; 
