@@ -19,7 +19,8 @@ router.get("/:id", async (req, res, next) => {
     try {
       const campus = await Campus.findByPk(req.params.id, {
         include: {
-          model: Student,
+          association: 'students',
+          attributes: ['firstName', 'lastName'],
         },
       });
       campus
