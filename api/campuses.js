@@ -20,7 +20,7 @@ router.get("/:id", async (req, res, next) => {
       const campus = await Campus.findByPk(req.params.id, {
         include: {
           association: 'students',
-          attributes: ['firstName', 'lastName'],
+          attributes: ['id', 'firstName', 'lastName'],
         },
       });
       campus
@@ -29,6 +29,16 @@ router.get("/:id", async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  });
+});
+
+router.post("/add", async (req, res, next) => {
+  const {name, imageUrl, address, description} = req.body;
+  try {
+      const newCampus = await Campus.create({name, imageUrl, address, description});
+      res.status(201).json(newCampus);
+  } catch (err) {
+      next(err);
+  }
+});
 
 module.exports = router; 
