@@ -41,4 +41,15 @@ router.post("/add", async (req, res, next) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    const RemoveStudent = await Student.destroy({ where: { id: req.params.id } });
+    RemoveStudent
+      ? res.status(200).send("Student removed successfully")
+      : res.status(404).send("Student Not Found");
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router; 
