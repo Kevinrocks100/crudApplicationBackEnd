@@ -4,7 +4,12 @@ const { Campus, Student } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
     try {
-        const allCampuses = await Campus.findAll();
+        const allCampuses = await Campus.findAll({
+          include: {
+            association: 'students',
+            attributes: ['id', 'firstName', 'lastName'],
+          },
+        });
 
         allCampuses
             ? res.status(200).json(allCampuses)
