@@ -52,4 +52,31 @@ router.delete("/delete/:id", async (req, res, next) => {
   }
 });
 
+// Route for updating a campus
+router.put("/edit/:id", async (req, res, next) => {
+  try {
+    const { name, imageUrl, address, description } = req.body; 
+
+    const [rowsAffected, updatedCampus] = await Campus.update(
+      {
+        name,
+        imageUrl,
+        address,
+        description,
+      },
+      {
+        where: { id: req.params.id },
+        returning: true,
+      }
+    );
+    if (rowsAffected > 0) {
+      res.status(200).json({ updatedCampus });
+    } else {
+      res.status(404).send("Campus Not Found");
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router; 
