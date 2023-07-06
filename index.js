@@ -11,6 +11,15 @@ app.use(express.json());
 
 // Mount on API
 app.use("/api", require("./api"));
+
+app.get("/", (req, res) => {
+  res.send(`    
+    <div>
+      <h1>Welcome to Kevin's API</h1>
+      <img src="https://www.cleo.com/sites/default/files/2022-08/api-integration.png" alt="API Integration" />
+    </div>`
+  );
+});
 // Run server function
 const serverRun = () => {
   app.listen(PORT, () => {
