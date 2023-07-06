@@ -32,9 +32,9 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/add", async (req, res, next) => {
-  const {firstName, lastName, email, imageUrl, gpa} = req.body;
+  const {firstName, lastName, email, imageUrl, gpa, campusId} = req.body;
   try {
-      const newStudent = await Student.create({firstName, lastName, email, imageUrl, gpa});
+      const newStudent = await Student.create({firstName, lastName, email, imageUrl, gpa, campusId});
       res.status(201).json(newStudent);
   } catch (err) {
       next(err);
